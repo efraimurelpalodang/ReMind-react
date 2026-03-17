@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import StackedList from "./components/StackedList";
 import FormInput from "./components/FormInput";
+import Footer from "./components/Footer"; // Import Footer
 
 export default function Home() {
   const [lists, setLists] = useState<string[]>([]);
 
+  // Load dari localStorage saat mount
   useEffect(() => {
     const saved = localStorage.getItem('shopping-list')
     if (saved) {
@@ -13,12 +15,13 @@ export default function Home() {
     }
   }, [])
 
+  // Save ke localStorage setiap ada perubahan
   useEffect(() => {
-    localStorage.setItem("shopping-list", JSON.stringify(lists));
-  }, [lists]);
+    localStorage.setItem('shopping-list', JSON.stringify(lists))
+  }, [lists])
 
   const addList = (newItem: string) => {
-    if (!newItem.trim()) return 
+    if (!newItem.trim()) return
     setLists(prev => [...prev, newItem.trim()]);
   };
 
@@ -27,26 +30,40 @@ export default function Home() {
   };
 
   const editList = (index: number, newText: string) => {
-    setLists((prev) => prev.map((item, i) => (i === index ? newText : item)));
+    setLists(prev => prev.map((item, i) => i === index ? newText : item));
   };
 
   const toggleComplete = (index: number) => {
-    setLists((prev) =>
-      prev.map((item, i) => {
+    setLists(prev => prev.map((item, i) => {
       if (i === index) {
-        return item.startsWith("[DONE]")
-        ? item.replace("[DONE]", "") 
-        : "[DONE]" + item; 
+        if (item.startsWith('[DONE]')) {
+          return item.replace('[DONE]', '')
+        } else {
+          return '[DONE]' + item
+        }
       }
-      return item;
-      }),
-    );
+      return item
+    }));
+  };
+
+  // Handler baru untuk clear semua
+  const clearAll = () => {
+    setLists([]);
   };
 
   return (
-    <div className="md:w-3/4 w-sm mx-auto mt-7">
-      <FormInput onAdd={addList} />
-      <StackedList lists={lists} onDelete={deleteList} onEdit={editList} onToggleComplete={toggleComplete} />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8 px-4">
+      <div className="md:w-3/4 max-w-2xl mx-auto">
+        <FormInput onAdd={addList}/>
+        <StackedList 
+          lists={lists}
+          onDelete={deleteList}
+          onEdit={editList}
+          onToggleComplete={toggleComplete}
+        />
+        {/* Tambah Footer di sini */}
+        <Footer />
+      </div>
     </div>
   );
 }
