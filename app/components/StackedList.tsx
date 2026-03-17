@@ -29,7 +29,7 @@ const StackedList = ({ lists, onDelete, onEdit, onToggleComplete }: StackedListP
 
   return (
     <>
-      <h1 className="text-2xl mb-3 font-semibold text-white">Daftar Catatan</h1>
+      <h1 className="text-2xl mb-3 font-extralight text-white">Daftar Catatan</h1>
       
       {lists.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
@@ -46,7 +46,7 @@ const StackedList = ({ lists, onDelete, onEdit, onToggleComplete }: StackedListP
               <li 
                 key={i} 
                 className={`
-                  flex items-center justify-between gap-x-4 p-4 rounded-lg border max-w-full transition-all duration-200
+                  flex items-center justify-between gap-x-4 p-4 rounded-lg border max-w-90 transition-all duration-200
                   ${isCompleted 
                     ? 'bg-emerald-500/10 border-emerald-500/30 opacity-75' 
                     : 'bg-white/5 border-gray-600 hover:bg-white/10'

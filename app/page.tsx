@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 py-8 px-4">
       <div className="md:w-3/4 max-w-2xl mx-auto">
         <FormInput onAdd={addList}/>
         <StackedList 
@@ -61,7 +61,6 @@ export default function Home() {
           onEdit={editList}
           onToggleComplete={toggleComplete}
         />
-        {/* Tambah Footer di sini */}
         <Footer />
       </div>
     </div>

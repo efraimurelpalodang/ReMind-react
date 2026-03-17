@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="pb-8 absolute mx-auto bottom-0 right-0 left-0">
+    <footer className="pb-8 fixed mx-auto bottom-0 right-0 left-0">
       {/* Copyright */}
       <div className="mt-8 text-center">
         <p className="text-gray-500 text-sm">
